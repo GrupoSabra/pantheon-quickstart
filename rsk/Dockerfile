@@ -1,8 +1,7 @@
 #default version to latest
-ARG RSK_VERSION=1.0
-ARG RSK_IMAGE=test/rsk
+ARG PANTHEON_VERSION=latest
 
-FROM $RSK_IMAGE:$RSK_VERSION
+FROM albertruno/rsk-base:1.1.4
 
 # Copy new entrypoint scripts
 COPY *_start.sh /opt/pantheon/

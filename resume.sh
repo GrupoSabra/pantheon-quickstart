@@ -18,7 +18,7 @@ NO_LOCK_REQUIRED=false
 
 
 echo "${bold}*************************************"
-echo "Pantheon Quickstart ${version}"
+echo "RSK Quickstart ${version}"
 echo "*************************************${normal}"
 echo "Resume network"
 echo "----------------------------------"

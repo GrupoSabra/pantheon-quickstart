@@ -35,5 +35,3 @@ bootnode_enode_address="enode://${bootnode_pubkey}@${boonode_ip}:${BOOTNODE_P2P_
 
 # run with bootnode param
 /opt/pantheon/bin/pantheon $@ --bootnodes=$bootnode_enode_address
-
-echo "/opt/pantheon/bin/pantheon ${@} --bootnodes=${bootnode_enode_address}" > /opt/pantheon/nodestart.txt

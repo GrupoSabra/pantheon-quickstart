@@ -16,9 +16,5 @@ PUBLIC_KEYS_DIR=${PANTHEON_PUBLIC_KEY_DIRECTORY:=/opt/pantheon/public-keys/}
 # write pub key for making other nodes able to connect to bootnode
 /opt/pantheon/bin/pantheon $@ public-key export --to="${PUBLIC_KEYS_DIR}bootnode"
 
-echo "/opt/pantheon/bin/pantheon ${@} public-key export --to='${PUBLIC_KEYS_DIR}bootnode'" > /opt/pantheon/bootstart1_start.txt
-
 # run bootnode with discovery but no bootnodes as it's our bootnode.
 /opt/pantheon/bin/pantheon $@ --bootnodes
-
-echo "/opt/pantheon/bin/pantheon ${@} --bootnodes" > /opt/pantheon/bootstart2_start.txt

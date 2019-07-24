@@ -4,7 +4,7 @@
   "parameters": {
     "vmName": {
       "type": "string",
-      "defaultValue": "quickstart",
+      "defaultValue": "quickstart-rsk",
       "maxLength": 11,
       "metadata": {
         "description": "Name of your VM"

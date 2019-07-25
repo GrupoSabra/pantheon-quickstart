@@ -10,7 +10,7 @@ services:
     image: quickstart/rsk:${PANTHEON_VERSION}
     environment:
       - PANTHEON_PUBLIC_KEY_DIRECTORY=${PANTHEON_PUBLIC_KEY_DIRECTORY}
-    entrypoint: /opt/pantheon/bootnode_start.sh --network=dev --metrics-enabled --metrics-host=0.0.0.0 --metrics-port=9545 --host-whitelist=*
+    entrypoint: /opt/rsk-private/bootnode_start.sh --network=dev --metrics-enabled --metrics-host=0.0.0.0 --metrics-port=9545 --host-whitelist=*
     volumes:
       - public-keys:${PANTHEON_PUBLIC_KEY_DIRECTORY}
 

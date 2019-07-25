@@ -11,10 +11,10 @@
 # an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
 # specific language governing permissions and limitations under the License.
 
-PUBLIC_KEYS_DIR=${PANTHEON_PUBLIC_KEY_DIRECTORY:=/opt/pantheon/public-keys/}
+PUBLIC_KEYS_DIR=${PANTHEON_PUBLIC_KEY_DIRECTORY:=/opt/rsk-private/public-keys/}
 
 # write pub key for making other nodes able to connect to bootnode
-/opt/pantheon/bin/pantheon $@ public-key export --to="${PUBLIC_KEYS_DIR}bootnode"
+/opt/rsk-private/bin/rsk-private $@ public-key export --to="${PUBLIC_KEYS_DIR}bootnode"
 
 # run bootnode with discovery but no bootnodes as it's our bootnode.
-/opt/pantheon/bin/pantheon $@ --bootnodes
+/opt/rsk-private/bin/rsk-private $@ --bootnodes

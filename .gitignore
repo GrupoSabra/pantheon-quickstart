@@ -1,12 +1,12 @@
 .idea/
-/pantheon-quickstart.iml
+/rsk-quickstart.iml
 *.lock
 
-#ignore all the DB and temp files and folders created by pantheon
-/privacy/pantheon/data*/database
-/privacy/pantheon/data*/private*
-/privacy/pantheon/data*/uploads
-/privacy/pantheon/data*/pantheon.ports
+#ignore all the DB and temp files and folders created by rsk
+/privacy/rsk/data*/database
+/privacy/rsk/data*/private*
+/privacy/rsk/data*/uploads
+/privacy/rsk/data*/rsk.ports
 
 ./volumes/
 .DS_Store

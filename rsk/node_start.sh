@@ -14,7 +14,7 @@
 # write pub key for checking that network works
 node_id=`hostname`
 
-PUBLIC_KEYS_DIR=${PANTHEON_PUBLIC_KEY_DIRECTORY:=/opt/rsk-private/public-keys/}
+PUBLIC_KEYS_DIR=${RSK_PUBLIC_KEY_DIRECTORY:=/opt/rsk-private/public-keys/}
 
 /opt/rsk-private/bin/rsk-private $@ public-key export --to="${PUBLIC_KEYS_DIR}${node_id}"
 

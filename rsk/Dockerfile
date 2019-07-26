@@ -1,5 +1,5 @@
 #default version to latest
-ARG PANTHEON_VERSION=latest
+ARG RSK_VERSION=latest
 
 FROM sabradevregistry01.azurecr.io/rsk-private:rsk-private.1.1.4
 

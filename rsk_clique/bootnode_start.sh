@@ -12,11 +12,11 @@
 # specific language governing permissions and limitations under the License.
 node_id=`hostname`
 
-PUBLIC_KEYS_DIR=${PANTHEON_PUBLIC_KEY_DIRECTORY:=/opt/pantheon/public-keys/}
-GENESIS_FILE_DIR=${PANTHEON_GENESIS_FILE_DIRECTORY:=/opt/pantheon/genesis/}
-DATA_DIR=${PANTHEON_DATA_DIR:=/var/lib/pantheon/}
+PUBLIC_KEYS_DIR=${RSK_PUBLIC_KEY_DIRECTORY:=/opt/rsk-private/public-keys/}
+GENESIS_FILE_DIR=${RSK_GENESIS_FILE_DIRECTORY:=/opt/rsk-private/genesis/}
+DATA_DIR=${RSK_DATA_DIR:=/var/lib/rsk-private/}
 
-PANTHEON_BINARY="/opt/pantheon/bin/pantheon $@ --data-path=${DATA_DIR}"
+RSK_BINARY="/opt/rsk-private/bin/rsk-private $@ --data-path=${DATA_DIR}"
 
 PUBLIC_KEY_FILE="${PUBLIC_KEYS_DIR}bootnode_pubkey"
 PUBLIC_ADDRESS_FILE="${PUBLIC_KEYS_DIR}bootnode_address"
@@ -28,22 +28,20 @@ GENESIS_TEMPLATE_FILE=${DATA_DIR}genesis.json.template
 GENESIS_FILE=${GENESIS_FILE_DIR}genesis.json
 
 # write pub key for making other nodes able to connect to bootnode
-${PANTHEON_BINARY} public-key export --to="${PUBLIC_KEY_FILE}"
+${RSK_BINARY} public-key export --to="${PUBLIC_KEY_FILE}"
 cp ${PUBLIC_KEY_FILE} ${PUBLIC_KEY_FILE_BY_ID}
 
 # get address for genesis
-raw_address=`${PANTHEON_BINARY} public-key export-address --to="${PUBLIC_ADDRESS_FILE}"`
+raw_address=`${RSK_BINARY} public-key export-address --to="${PUBLIC_ADDRESS_FILE}"`
 bootnode_address=`sed 's/^0x//' ${PUBLIC_ADDRESS_FILE}`
 cp ${PUBLIC_ADDRESS_FILE} ${PUBLIC_ADDRESS_FILE_BY_ID}
 
 # remove database as exporting public keys init the db but we don't have the right genesis yet
 rm -Rf ${DATA_DIR}/database
 
-# replace placeholder by encoded rpl address list in genesis
-addressJsonToEncode="[\"${bootnode_address}\"]"
-rlp=`echo ${addressJsonToEncode} | ${PANTHEON_BINARY} rlp encode`
-sedCommand="s/<RLP_EXTRA_DATA>/${rlp}/g"
+# replace placeholder by address in genesis
+sedCommand="s/<EXTRA_DATA_ADDRESSES>/${bootnode_address}/g"
 sed ${sedCommand} ${GENESIS_TEMPLATE_FILE} > ${GENESIS_FILE}
 
 # run bootnode with discovery but no bootnodes as it's our bootnode.
-${PANTHEON_BINARY} --genesis-file="${GENESIS_FILE}"
+${RSK_BINARY} --genesis-file="${GENESIS_FILE}"

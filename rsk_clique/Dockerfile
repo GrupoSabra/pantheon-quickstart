@@ -1,14 +1,14 @@
 #default version to latest
-ARG PANTHEON_VERSION=latest
+ARG RSK_VERSION=latest
 
-FROM pegasyseng/pantheon:$PANTHEON_VERSION
+FROM sabradevregistry01.azurecr.io/rsk-private:rsk-private.1.1.4
 
-ENV PANTHEON_OPTS=''
+ENV RSK_OPTS=''
 
 # Copy new entrypoint scripts
-COPY *_start.sh /opt/pantheon/
+COPY *_start.sh /opt/rsk-private/
 # Copy genesis template
-COPY genesis.json.template /var/lib/pantheon/
+COPY genesis.json.template /var/lib/rsk-private/
 
 # Install a dos 2 unix EOL converter (supporting either alpine or ubuntu images)
 RUN (apt-get update && apt-get install dos2unix || apk add --update dos2unix) && \
@@ -16,7 +16,7 @@ RUN (apt-get update && apt-get install dos2unix || apk add --update dos2unix) &&
 
 # Run dos2unix EOL conversion on all shell scripts to prevent scripts to fail if edited with a windows IDE
 # that rewrote the EOL to CRLF before we build the image. See issue #4
-RUN find /opt/pantheon/*.sh -type f -print0 | xargs -0 dos2unix
+RUN find /opt/rsk-private/*.sh -type f -print0 | xargs -0 dos2unix
 
 # specify default entrypoint to start the node
-ENTRYPOINT ["/opt/pantheon/node_start.sh"]
+ENTRYPOINT ["/opt/rsk-private/node_start.sh"]

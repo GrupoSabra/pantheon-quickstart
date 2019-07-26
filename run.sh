@@ -67,7 +67,7 @@ while [ $# -gt 0 ]; do
         ibft2|clique)
           export QUICKSTART_POA_NAME="${2}"
           export QUICKSTART_POA_API="${!2}"
-          export QUICKSTART_VERSION="${PANTHEON_VERSION}-${QUICKSTART_POA_NAME}"
+          export QUICKSTART_VERSION="${RSK_VERSION}-${QUICKSTART_POA_NAME}"
           composeFile="-f docker-compose_poa.yml"
           ;;
         ethash)

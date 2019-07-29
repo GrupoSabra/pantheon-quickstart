@@ -5,15 +5,15 @@ services:
       context: rsk
       args:
         RSK_VERSION: ${RSK_VERSION}
-    image: quickstart/pantheon:${RSK_VERSION}-privacy
+    image: quickstart/rsk:${RSK_VERSION}-privacy
     environment:
       - RSK_PUBLIC_KEY_DIRECTORY=${RSK_PUBLIC_KEY_DIRECTORY}
-    entrypoint: /opt/pantheon/bootnode_start.sh --network=dev --min-gas-price=0
+    entrypoint: /opt/rsk-private/bootnode_start.sh --network=dev --min-gas-price=0
     volumes:
       - public-keys:${RSK_PUBLIC_KEY_DIRECTORY}
 
   minernode:
-    image: quickstart/pantheon:${RSK_VERSION}-privacy
+    image: quickstart/rsk:${RSK_VERSION}-privacy
     environment:
       - RSK_PUBLIC_KEY_DIRECTORY=${RSK_PUBLIC_KEY_DIRECTORY}
     command: ["--network=dev",
@@ -38,7 +38,7 @@ services:
     entrypoint: /orion/bin/orion ${ORION_DATA_FOLDER3}/orion.conf
 
   node1:
-    image: quickstart/pantheon:${RSK_VERSION}-privacy
+    image: quickstart/rsk:${RSK_VERSION}-privacy
     environment:
       - RSK_PUBLIC_KEY_DIRECTORY=${RSK_PUBLIC_KEY_DIRECTORY}
     command: ["--network=dev",
@@ -56,8 +56,8 @@ services:
               "--min-gas-price=0"]
     volumes:
       - public-keys:${RSK_PUBLIC_KEY_DIRECTORY}
-      - ${PWD}/pantheon/data1:/var/lib/pantheon
-      - ${PWD}/orion/orion1:/etc/pantheon
+      - ${PWD}/rsk/data1:/var/lib/rsk-private
+      - ${PWD}/orion/orion1:/etc/rsk-private
     depends_on:
       - bootnode
       - orion1
@@ -66,7 +66,7 @@ services:
       - 20001:8546
 
   node2:
-    image: quickstart/pantheon:${RSK_VERSION}-privacy
+    image: quickstart/rsk:${RSK_VERSION}-privacy
     environment:
       - RSK_PUBLIC_KEY_DIRECTORY=${RSK_PUBLIC_KEY_DIRECTORY}
     command: ["--network=dev",
@@ -84,8 +84,8 @@ services:
               "--min-gas-price=0"]
     volumes:
       - public-keys:${RSK_PUBLIC_KEY_DIRECTORY}
-      - ${PWD}/pantheon/data2:/var/lib/pantheon
-      - ${PWD}/orion/orion2:/etc/pantheon
+      - ${PWD}/rsk/data2:/var/lib/rsk-private
+      - ${PWD}/orion/orion2:/etc/rsk-private
     depends_on:
       - bootnode
       - orion2
@@ -93,7 +93,7 @@ services:
       - 20002:8545
       - 20003:8546
   node3:
-    image: quickstart/pantheon:${RSK_VERSION}-privacy
+    image: quickstart/rsk:${RSK_VERSION}-privacy
     environment:
       - RSK_PUBLIC_KEY_DIRECTORY=${RSK_PUBLIC_KEY_DIRECTORY}
     command: ["--network=dev",
@@ -111,8 +111,8 @@ services:
               "--min-gas-price=0"]
     volumes:
       - public-keys:${RSK_PUBLIC_KEY_DIRECTORY}
-      - ${PWD}/orion/orion3:/etc/pantheon
-      - ${PWD}/pantheon/data3:/var/lib/pantheon
+      - ${PWD}/orion/orion3:/etc/rsk-private
+      - ${PWD}/rsk/data3:/var/lib/rsk-private
     depends_on:
       - bootnode
       - orion3
@@ -121,7 +121,7 @@ services:
       - 20005:8546
 
   rpcnode:
-    image: quickstart/pantheon:${RSK_VERSION}-privacy
+    image: quickstart/rsk:${RSK_VERSION}-privacy
     command: ["--network=dev",
               "--rpc-http-enabled",
               "--rpc-http-host=0.0.0.0",

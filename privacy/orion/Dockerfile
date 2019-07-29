@@ -10,7 +10,7 @@ COPY ./orion*.tar.gz /tmp/orion
 WORKDIR /tmp/orion
 
 RUN tar xzf orion*.tar.gz \
-  && rm orion*.tar.gz && \
+  && rm orion*.tar.gz \
   && mv orion* build
 
 FROM openjdk:8-jre

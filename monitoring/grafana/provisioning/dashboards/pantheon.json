@@ -48,7 +48,7 @@
       }
     ]
   },
-  "description": "Provides an overview of Pantheon nodes",
+  "description": "Provides an overview of RSK nodes",
   "editable": true,
   "gnetId": 10273,
   "graphTooltip": 0,
@@ -819,7 +819,7 @@
   "schemaVersion": 18,
   "style": "dark",
   "tags": [
-    "pantheon",
+    "RSK",
     "ethereum"
   ],
   "templating": {

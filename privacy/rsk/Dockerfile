@@ -4,7 +4,7 @@ ARG RSK_VERSION=latest
 FROM sabradevregistry01.azurecr.io/rsk-private:rsk-private.1.1.4
 
 # Copy new entrypoint scripts
-COPY *_start.sh /rsk-private/
+COPY *_start.sh /opt/rsk-private/
 
 # Copy Orion public keys
 COPY orion/* /orion/

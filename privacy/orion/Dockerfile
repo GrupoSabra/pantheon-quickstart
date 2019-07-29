@@ -7,7 +7,7 @@ RUN apt-get -qq update && \
 
 RUN git clone https://github.com/PegaSysEng/orion.git && \
     cd orion && \
-    ./gradlew build && \
+    ./gradlew build -x test && \
     mkdir /toCopy && \
     mv ./build/distributions/orion*.tar.gz /toCopy
 

@@ -1,5 +1,5 @@
 
-FROM openjdk:12.0.2-jdk-oraclelinux7 as builder
+FROM openjdk:8-jdk as builder
 
 RUN apt-get -qq update && \
     apt-get -qq -y install git && \

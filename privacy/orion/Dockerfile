@@ -1,28 +1,24 @@
-
 FROM openjdk:8-jdk as builder
 
 RUN apt-get -qq update && \
     apt-get -qq -y install git && \
     apt-get -qq -y install libsodium-dev
 
-RUN git clone https://github.com/PegaSysEng/orion.git && \
-    cd orion && \
-    ./gradlew build && \
-    mkdir /toCopy && \
-    mv ./build/distributions/orion*.tar.gz /toCopy
+RUN mkdir /tmp/orion
+COPY ./orion*.tar.gz /tmp/orion
 
-WORKDIR toCopy
+WORKDIR /tmp/orion
 
-RUN tar -xvzf orion* && \
-    rm orion*.tar.gz && \
-    mv orion* build
+RUN tar xzf orion*.tar.gz \
+  && rm orion*.tar.gz \
+  && mv orion* build
 
 FROM openjdk:8-jre
 
 RUN apt-get -qq update && \
     apt-get -qq -y install libsodium-dev
 
-COPY --from=builder /toCopy/* /orion/
+COPY --from=builder /tmp/orion/* /orion/
 
 WORKDIR orion
 

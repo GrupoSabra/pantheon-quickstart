@@ -4,7 +4,7 @@
   "parameters": {
     "vmName": {
       "type": "string",
-      "defaultValue": "quickstart",
+      "defaultValue": "quickstart-rsk",
       "maxLength": 11,
       "metadata": {
         "description": "Name of your VM"
@@ -176,7 +176,7 @@
         "autoUpgradeMinorVersion": true,
         "settings": {
           "fileUris": [
-            "https://raw.githubusercontent.com/PegaSysEng/pantheon-quickstart/master/azure/install_and_run.sh"
+            "https://raw.githubusercontent.com/arunog/pantheon-quickstart/master/azure/install_and_run.sh"
           ],
           "commandToExecute": "[concat('sh install_and_run.sh ', parameters('adminUsername'))]"
         }

@@ -2,26 +2,26 @@ version: '3.2'
 services:
   bootnode:
     build:
-      context: pantheon
+      context: rsk
       args:
-        PANTHEON_VERSION: ${PANTHEON_VERSION}
-    image: quickstart/pantheon:${PANTHEON_VERSION}-privacy
+        RSK_VERSION: ${RSK_VERSION}
+    image: quickstart/rsk:${RSK_VERSION}-privacy
     environment:
-      - PANTHEON_PUBLIC_KEY_DIRECTORY=${PANTHEON_PUBLIC_KEY_DIRECTORY}
-    entrypoint: /opt/pantheon/bootnode_start.sh --network=dev --min-gas-price=0
+      - RSK_PUBLIC_KEY_DIRECTORY=${RSK_PUBLIC_KEY_DIRECTORY}
+    entrypoint: /opt/rsk-private/bootnode_start.sh --network=dev --min-gas-price=0
     volumes:
-      - public-keys:${PANTHEON_PUBLIC_KEY_DIRECTORY}
+      - public-keys:${RSK_PUBLIC_KEY_DIRECTORY}
 
   minernode:
-    image: quickstart/pantheon:${PANTHEON_VERSION}-privacy
+    image: quickstart/rsk:${RSK_VERSION}-privacy
     environment:
-      - PANTHEON_PUBLIC_KEY_DIRECTORY=${PANTHEON_PUBLIC_KEY_DIRECTORY}
+      - RSK_PUBLIC_KEY_DIRECTORY=${RSK_PUBLIC_KEY_DIRECTORY}
     command: ["--network=dev",
               "--miner-enabled",
               "--miner-coinbase=${MINER_COINBASE}",
               "--min-gas-price=0"]
     volumes:
-      - public-keys:${PANTHEON_PUBLIC_KEY_DIRECTORY}
+      - public-keys:${RSK_PUBLIC_KEY_DIRECTORY}
     depends_on:
       - bootnode
 
@@ -38,9 +38,9 @@ services:
     entrypoint: /orion/bin/orion ${ORION_DATA_FOLDER3}/orion.conf
 
   node1:
-    image: quickstart/pantheon:${PANTHEON_VERSION}-privacy
+    image: quickstart/rsk:${RSK_VERSION}-privacy
     environment:
-      - PANTHEON_PUBLIC_KEY_DIRECTORY=${PANTHEON_PUBLIC_KEY_DIRECTORY}
+      - RSK_PUBLIC_KEY_DIRECTORY=${RSK_PUBLIC_KEY_DIRECTORY}
     command: ["--network=dev",
               "--privacy-enabled=true",
               "--privacy-url=${ORION_URL1}",
@@ -55,9 +55,9 @@ services:
               "--host-whitelist=*",
               "--min-gas-price=0"]
     volumes:
-      - public-keys:${PANTHEON_PUBLIC_KEY_DIRECTORY}
-      - ${PWD}/pantheon/data1:/var/lib/pantheon
-      - ${PWD}/orion/orion1:/etc/pantheon
+      - public-keys:${RSK_PUBLIC_KEY_DIRECTORY}
+      - ${PWD}/rsk/data1:/var/lib/rsk-private
+      - ${PWD}/orion/orion1:/etc/rsk-private
     depends_on:
       - bootnode
       - orion1
@@ -66,9 +66,9 @@ services:
       - 20001:8546
 
   node2:
-    image: quickstart/pantheon:${PANTHEON_VERSION}-privacy
+    image: quickstart/rsk:${RSK_VERSION}-privacy
     environment:
-      - PANTHEON_PUBLIC_KEY_DIRECTORY=${PANTHEON_PUBLIC_KEY_DIRECTORY}
+      - RSK_PUBLIC_KEY_DIRECTORY=${RSK_PUBLIC_KEY_DIRECTORY}
     command: ["--network=dev",
               "--privacy-enabled=true",
               "--privacy-url=${ORION_URL2}",
@@ -83,9 +83,9 @@ services:
               "--host-whitelist=*",
               "--min-gas-price=0"]
     volumes:
-      - public-keys:${PANTHEON_PUBLIC_KEY_DIRECTORY}
-      - ${PWD}/pantheon/data2:/var/lib/pantheon
-      - ${PWD}/orion/orion2:/etc/pantheon
+      - public-keys:${RSK_PUBLIC_KEY_DIRECTORY}
+      - ${PWD}/rsk/data2:/var/lib/rsk-private
+      - ${PWD}/orion/orion2:/etc/rsk-private
     depends_on:
       - bootnode
       - orion2
@@ -93,9 +93,9 @@ services:
       - 20002:8545
       - 20003:8546
   node3:
-    image: quickstart/pantheon:${PANTHEON_VERSION}-privacy
+    image: quickstart/rsk:${RSK_VERSION}-privacy
     environment:
-      - PANTHEON_PUBLIC_KEY_DIRECTORY=${PANTHEON_PUBLIC_KEY_DIRECTORY}
+      - RSK_PUBLIC_KEY_DIRECTORY=${RSK_PUBLIC_KEY_DIRECTORY}
     command: ["--network=dev",
               "--privacy-enabled=true",
               "--privacy-url=${ORION_URL3}",
@@ -110,9 +110,9 @@ services:
               "--host-whitelist=*",
               "--min-gas-price=0"]
     volumes:
-      - public-keys:${PANTHEON_PUBLIC_KEY_DIRECTORY}
-      - ${PWD}/orion/orion3:/etc/pantheon
-      - ${PWD}/pantheon/data3:/var/lib/pantheon
+      - public-keys:${RSK_PUBLIC_KEY_DIRECTORY}
+      - ${PWD}/orion/orion3:/etc/rsk-private
+      - ${PWD}/rsk/data3:/var/lib/rsk-private
     depends_on:
       - bootnode
       - orion3
@@ -121,7 +121,7 @@ services:
       - 20005:8546
 
   rpcnode:
-    image: quickstart/pantheon:${PANTHEON_VERSION}-privacy
+    image: quickstart/rsk:${RSK_VERSION}-privacy
     command: ["--network=dev",
               "--rpc-http-enabled",
               "--rpc-http-host=0.0.0.0",
@@ -133,14 +133,14 @@ services:
               "--host-whitelist=*",
               "--min-gas-price=0"]
     volumes:
-      - public-keys:${PANTHEON_PUBLIC_KEY_DIRECTORY}
+      - public-keys:${RSK_PUBLIC_KEY_DIRECTORY}
     depends_on:
       - bootnode
   explorer:
     build:
       context: ../block-explorer-light
       dockerfile: Dockerfile-privacy
-    image: quickstart/block-explorer-light:${PANTHEON_VERSION}-privacy
+    image: quickstart/block-explorer-light:${RSK_VERSION}-privacy
     depends_on:
       - rpcnode
     ports:

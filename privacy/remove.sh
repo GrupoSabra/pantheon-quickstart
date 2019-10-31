@@ -16,17 +16,17 @@
 docker-compose down -v
 docker-compose rm -sfv
 
-rm -rf pantheon/data1/database
-rm -rf pantheon/data1/priv*
-rm -rf pantheon/data1/uploads
-rm -rf pantheon/data1/pantheon.ports
+rm -rf rsk/data1/database
+rm -rf rsk/data1/priv*
+rm -rf rsk/data1/uploads
+rm -rf rsk/data1/pantheon.ports
 
-rm -rf pantheon/data2/database
-rm -rf pantheon/data2/priv*
-rm -rf pantheon/data2/uploads
-rm -rf pantheon/data2/pantheon.ports
+rm -rf rsk/data2/database
+rm -rf rsk/data2/priv*
+rm -rf rsk/data2/uploads
+rm -rf rsk/data2/pantheon.ports
 
-rm -rf pantheon/data3/database
-rm -rf pantheon/data3/priv*
-rm -rf pantheon/data3/uploads
-rm -rf pantheon/data3/pantheon.ports
+rm -rf rsk/data3/database
+rm -rf rsk/data3/priv*
+rm -rf rsk/data3/uploads
+rm -rf rsk/data3/pantheon.ports

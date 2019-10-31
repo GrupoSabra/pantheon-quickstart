@@ -62,6 +62,6 @@ sudo chmod +x /usr/local/bin/docker-compose
 
 # Go to user home, clone quickstart project and run it to be available on port 80 of the machine.
 cd /home/$USER
-git clone https://github.com/PegaSysEng/pantheon-quickstart.git
-cd pantheon-quickstart
+git clone https://github.com/PegaSysEng/pantheon-quickstart.git rsk-quickstart
+cd rsk-quickstart
 sudo ./run.sh -p $PORT
